@@ -1,2 +1,2 @@
-Git is a good software
-Git is so good
+Git is a good version software
+Git is free
