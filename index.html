@@ -1,38 +1,42 @@
-<html>
+---
+layout: page
+description: "一生想做浪漫极客"
+---
 
-<head>
-    <title>test github pages</title>
-    <style>
-    body {
-        background-color: #C7EDCC;
-    }
-    
-    .info {
-        font-size: 3.5rem;
-        color: brown;
-        width: 50%;
-        height: 30%;
-        position: relative;
-        left: 25%;
-        top: 20%;
-        text-align: center;
-    }
-    
-    .info p {
-        margin: 0;
-        padding: 0;
-    }
-    </style>
-</head>
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        <div class="post-content-preview">
+            {{ post.content | strip_html | truncate:200 }}
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+    </p>
+</div>
+<hr>
+{% endfor %}
 
-<body>
-    <div class="info">
-        <p>this page is in building</p>
-        <p>please wait...</p>
-		<p>so easy!</p>
-    </div>
-</body>
-<script type="text/javascript">
-  
-</script>
-</html>
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}
